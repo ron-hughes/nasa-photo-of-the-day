@@ -6,11 +6,19 @@ import Apod from "./apod"
 import axios from "axios"
 
 function App() {
-  const [apodURL, setApod] = useState()
-  
+  // setting imgage URL
+  const [apodURL, setApod] = useState();
+  // setting explanation
+  const [explanation, setExp] = useState();
+
+
+
     axios.get('https://api.nasa.gov/planetary/apod?api_key=Rr0SIJ8git2k33KMUdKZNwyk9t1uWKSFK0IiMiFZ')
       .then( res => {
         setApod(res.data.url);
+        setExp(res.data.explanation);
+        console.log(res)
+
       })
       .catch( err => {
 
@@ -25,7 +33,7 @@ function App() {
    
       <Header />
       <hr/>
-      <Apod apodURL={apodURL}/>
+      <Apod apodURL={apodURL} explanation={explanation}/>
       <hr />
       <Info/>
 
