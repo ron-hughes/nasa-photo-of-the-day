@@ -1,17 +1,24 @@
-import React, {useState, useEffect} from "react";
-import "./App.css";
+import React, {useState, useEffect} from "react"
+import "./App.css"
 import Header from "./header"
 import Info from "./info"
-import ApodCall from "./apod-api"
 import Apod from "./apod"
+import axios from "axios"
 
 function App() {
-  const [apodURL, setApod] = useState('https://apod.nasa.gov/apod/image/1908/AntaresRho_McGarvey_960.jpg')
+  const [apodURL, setApod] = useState()
   
+    axios.get('https://api.nasa.gov/planetary/apod?api_key=Rr0SIJ8git2k33KMUdKZNwyk9t1uWKSFK0IiMiFZ')
+      .then( res => {
+        setApod(res.data.url);
+      })
+      .catch( err => {
+
+      })
   
-  useEffect(() => {
-    ApodCall();  
-  }, [])
+  // useEffect(() => {
+  //   ApodCall();  
+  // }, [])
 
   return (
     <div className="App">
@@ -20,7 +27,7 @@ function App() {
       <hr/>
       <Apod apodURL={apodURL}/>
       <hr />
-      <Info apodURL={apodURL}/>
+      <Info/>
 
     
 
